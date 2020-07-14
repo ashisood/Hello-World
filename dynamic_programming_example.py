@@ -18,7 +18,7 @@ def fib1(n):
         :type memo: object
         """
         if memo[n] is not None:
-            print("from memo")
+            #print("from memo")
             return memo[n]
 
         if n == 1 or n == 2:
@@ -26,7 +26,7 @@ def fib1(n):
         else:
             result = fib(n - 1, memo) + fib(n - 2, memo)
             memo[n] = result
-        print("after recursion")
+        #print("after recursion")
         return result
 
     return fib(n, memo)
@@ -34,7 +34,7 @@ def fib1(n):
 
 def fib2(n):
     memo = [None] * (n + 1)
-    print(memo)
+    #print(memo)
     if n > 2:
         memo[2] = memo[1] = 1
     else:
@@ -44,23 +44,21 @@ def fib2(n):
         memo[i] = memo[i - 1] + memo[i - 2]
 
     return memo[n]
-print(fib(5))
-print(fib1(100))
-print(fib2(100))
 
-if __name__ == '__main1__':
+
+if __name__ == '__main__':
     import timeit
 
     f = fib(10)
-    print(f)
+    print(f"recursive fib(10)={f}")
     f = fib1(10)
-    print(f)
+    print(f"recursive with memo fib(10)={f}")
     f = fib2(10)
-    print(f)
+    print(f"iterative with memo fib(10)={f}")
     t1 = timeit.timeit("fib(10)", setup="from __main__ import fib")
-    t2 = timeit.timeit("fib1(10)", setup="from __main__ import fib1")
-    t3 = timeit.timeit("fib2(10)", setup="from __main__ import fib2")
-    print(t1)
-    print(t2)
-    print(t3)
+    t2 = timeit.timeit("fib1(100)", setup="from __main__ import fib1")
+    t3 = timeit.timeit("fib2(1000)", setup="from __main__ import fib2")
+    print(f"recursive fib(10) {t1}")
+    print(f"recursive with memo fib1(10) {t2}")
+    print(f"iterative with memo fib2(10) {t3}")
 
